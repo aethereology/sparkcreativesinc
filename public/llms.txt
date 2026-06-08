@@ -1,0 +1,26 @@
+# SparkCreatives Inc
+
+> SparkCreatives Inc is a 501(c)(3) public charity (EIN 33-4477854) that turns surplus into opportunity — transforming donated goods and creative materials into hands-on programs that help young people, families, and emerging creatives build confidence, skills, leadership, and sustainable pathways forward. Operating across Jacksonville, Florida and Cebu, Philippines.
+
+## Programs
+
+SparkCreatives runs four public programs that work together as one ecosystem (Spark Supply Network → Spark Boxes → Spark Labs → Spark Studio):
+
+- [Spark Boxes](/programs/spark-boxes): Access. Curated boxes of useful supplies, school materials, creative tools, and essentials put directly into people's hands.
+- [Spark Labs](/programs/spark-labs): Learning. Guided workshops and training experiences using donated and reclaimed materials.
+- [Spark Studio](/programs/spark-studio): Growth. Mentorship, leadership, project development, and venture pathways for emerging creatives.
+- [Spark Supply Network](/programs/spark-supply-network): Supply. Materials, goods, volunteer, and sustainability pipeline powering every SparkCreatives program.
+
+## Get involved
+
+- [Donate](/donate): Make a tax-deductible gift; sponsor a Spark Box or give to a specific program.
+- [Get Involved](/get-involved): Donate goods, volunteer, host a Spark Lab, or partner with us.
+- [Impact](/impact): Outputs, outcomes, equity, and 2026 goals.
+- [About](/about): Mission, story, leadership, and 501(c)(3) governance.
+- [Contact](/contact): Reach the team.
+
+## Notes
+
+- Aethelo is internal operations and impact infrastructure, not a public program.
+- Some figures and details are being re-verified before launch and are marked accordingly on the site.
+- Contact: hello@sparkcreativesinc.org
