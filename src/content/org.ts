@@ -12,7 +12,8 @@ export const org = {
   tagline: "Turn surplus into opportunity.",
   thesis:
     "SparkCreatives transforms donated goods and creative materials into hands-on programs that help young people, families, and emerging creatives build confidence, skills, leadership, and sustainable pathways forward.",
-  email: "hello@sparkcreativesinc.org",
+  // Main public contact (leadership confirmed 2026-06-10) — alias on M365, replaces hello@.
+  email: "ignite@sparkcreativesinc.org",
   // TODO: leadership confirm — address shown on current live site.
   address: {
     street: "6120 Caladesi Ct",
@@ -23,7 +24,11 @@ export const org = {
   },
   // Operating story: Jacksonville, FL volunteers supporting Cebu, Philippines communities.
   locations: ["Jacksonville, Florida", "Cebu, Philippines"],
+  // Regions served (leadership confirmed 2026-06-08). Used for schema areaServed.
+  regionsServed: ["Florida", "Canada", "Manila", "Cebu"],
   url: "https://sparkcreativesinc.org",
+  // Aethelo = operations/impact infrastructure, not a public program (leadership confirmed).
+  aetheloUrl: "https://aethelo.sparkcreativesinc.org",
   // TODO: leadership confirm — add real, verified social profiles before launch.
   social: [] as Array<{ label: string; href: string }>,
 } as const;

@@ -14,7 +14,8 @@ function getResend(): Resend | null {
   return cached;
 }
 
-// TODO: leadership confirm verified sending domain/address in Resend.
+// Sender identity (leadership confirmed 2026-06-10): ignite@sparkcreativesinc.org,
+// DKIM-signed via Resend; replies route to the M365 inbox behind the alias.
 const FROM = process.env.RESEND_FROM ?? `SparkCreatives <onboarding@resend.dev>`;
 const TO_INBOX = process.env.CONTACT_INBOX ?? org.email;
 

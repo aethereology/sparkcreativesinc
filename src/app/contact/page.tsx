@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Mail, MapPin, Lock } from "lucide-react";
+import { EnvelopeSimpleIcon, MapPinIcon, LockIcon } from "@phosphor-icons/react/ssr";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { Section, SectionHeading } from "@/components/layout/SectionWrapper";
 import { ContactForm } from "@/components/forms/ContactForm";
@@ -69,13 +69,13 @@ export default async function ContactPage(props: { searchParams: SearchParams })
               <h2 className="font-display text-lg font-semibold">Reach us directly</h2>
               <ul className="mt-4 space-y-3 text-ink-soft">
                 <li className="flex items-start gap-3">
-                  <Mail className="mt-0.5 h-5 w-5 shrink-0 text-primary" aria-hidden="true" />
+                  <EnvelopeSimpleIcon className="mt-0.5 h-5 w-5 shrink-0 text-primary" weight="duotone" aria-hidden="true" />
                   <a className="hover:text-primary" href={`mailto:${org.email}`}>
                     {org.email}
                   </a>
                 </li>
                 <li className="flex items-start gap-3">
-                  <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-primary" aria-hidden="true" />
+                  <MapPinIcon className="mt-0.5 h-5 w-5 shrink-0 text-primary" weight="duotone" aria-hidden="true" />
                   <span>
                     {org.address.street}
                     <br />
@@ -84,7 +84,7 @@ export default async function ContactPage(props: { searchParams: SearchParams })
                 </li>
               </ul>
               <p className="mt-3 text-xs text-ink-faint italic">
-                TODO: leadership confirm public contact details.
+                TODO: leadership confirm mailing address.
               </p>
             </div>
 
@@ -103,7 +103,7 @@ export default async function ContactPage(props: { searchParams: SearchParams })
             </div>
 
             <p className="flex items-start gap-2 text-sm text-ink-faint">
-              <Lock className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />
+              <LockIcon className="mt-0.5 h-4 w-4 shrink-0" weight="bold" aria-hidden="true" />
               We use your information only to respond to your message. We never sell your
               data. <span className="italic">TODO: leadership confirm privacy policy.</span>
             </p>
