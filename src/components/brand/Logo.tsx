@@ -9,12 +9,16 @@ export function SparkMark({ className }: { className?: string }) {
       fill="none"
       aria-hidden="true"
       focusable="false"
-      className={cn("h-7 w-7", className)}
+      className={cn("mark-orbit h-7 w-7 overflow-visible", className)}
     >
-      {/* Ring follows ink: near-black in light mode, near-white in dark. */}
-      <circle cx="10" cy="10" r="6" stroke="var(--color-ink)" strokeWidth="1.5" />
-      {/* The spark — brand green (same teal as the Spark Labs icon). */}
-      <circle cx="16" cy="10" r="2" fill="var(--color-accent)" />
+      <circle
+        cx="10"
+        cy="10"
+        r="6"
+        stroke="var(--color-ink)"
+        strokeWidth="1.5"
+      />
+      <circle className="orbit-dot" cx="16" cy="10" r="2" fill="var(--color-accent)" />
     </svg>
   );
 }
