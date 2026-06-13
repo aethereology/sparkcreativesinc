@@ -45,3 +45,5 @@ next-env.d.ts
 # /public/images and /public/docs, which ARE committed and served in production.
 # The 4 program PNGs sit at assets/ root (statically imported) and stay tracked.
 /assets/*/
+
+.vercel

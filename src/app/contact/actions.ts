@@ -2,7 +2,7 @@
 
 import { headers } from "next/headers";
 import { getContactRateLimitStatus, recordContactSubmission } from "@/lib/rate-limit";
-import { sendContactEmail } from "@/lib/resend";
+import { sendContactAutoReply, sendContactEmail } from "@/lib/resend";
 import type { ContactState } from "./contact-state";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -66,6 +66,14 @@ export async function submitContact(
       message: "Sorry — we couldn't send your message. Please email us directly.",
       errors: {},
     };
+  }
+
+  // Best-effort acknowledgment to the sender — never fail the submission if it
+  // doesn't send (the team notification above is what matters).
+  try {
+    await sendContactAutoReply({ name, email, inquiryType, message });
+  } catch (err) {
+    console.error("[contact] auto-reply threw:", err);
   }
 
   return {

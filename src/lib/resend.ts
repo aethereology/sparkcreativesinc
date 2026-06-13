@@ -1,5 +1,10 @@
 import { Resend } from "resend";
 import { org } from "@/content/org";
+import {
+  renderContactAutoReply,
+  renderContactNotification,
+  renderDonationReceipt,
+} from "@/lib/email-templates";
 
 /**
  * Email via Resend. Lazy + graceful: if RESEND_API_KEY is missing we log and
@@ -27,17 +32,7 @@ export async function sendContactEmail(input: {
   message: string;
 }): Promise<{ ok: boolean; skipped?: boolean }> {
   const resend = getResend();
-  const subject = `New ${input.inquiryType} inquiry from ${input.name}`;
-  const text = [
-    `Name: ${input.name}`,
-    `Email: ${input.email}`,
-    input.organization ? `Organization: ${input.organization}` : null,
-    `Inquiry type: ${input.inquiryType}`,
-    "",
-    input.message,
-  ]
-    .filter(Boolean)
-    .join("\n");
+  const { subject, html, text } = renderContactNotification(input);
 
   if (!resend) {
     console.warn("[resend] RESEND_API_KEY not set — contact email skipped.\n" + text);
@@ -49,10 +44,44 @@ export async function sendContactEmail(input: {
     to: TO_INBOX,
     replyTo: input.email,
     subject,
+    html,
     text,
   });
   if (error) {
     console.error("[resend] send failed:", error);
+    return { ok: false };
+  }
+  return { ok: true };
+}
+
+/**
+ * Auto-reply sent back to whoever submitted the contact form. Best-effort:
+ * callers should not fail the submission if this doesn't send.
+ */
+export async function sendContactAutoReply(input: {
+  name: string;
+  email: string;
+  inquiryType: string;
+  message: string;
+}): Promise<{ ok: boolean; skipped?: boolean }> {
+  const resend = getResend();
+  const { subject, html, text } = renderContactAutoReply(input);
+
+  if (!resend) {
+    console.warn("[resend] RESEND_API_KEY not set — contact auto-reply skipped.");
+    return { ok: true, skipped: true };
+  }
+
+  const { error } = await resend.emails.send({
+    from: FROM,
+    to: input.email,
+    replyTo: TO_INBOX,
+    subject,
+    html,
+    text,
+  });
+  if (error) {
+    console.error("[resend] auto-reply failed:", error);
     return { ok: false };
   }
   return { ok: true };
@@ -64,14 +93,10 @@ export async function sendDonationReceipt(input: {
   designation: string;
 }): Promise<{ ok: boolean; skipped?: boolean }> {
   const resend = getResend();
-  const text =
-    `Thank you for your gift of ${input.amount} to ${org.name}.\n\n` +
-    `Designation: ${input.designation}\n\n` +
-    `Your support helps turn surplus into opportunity.\n\n` +
-    `${org.name} is a ${org.legalStatus} (EIN ${org.ein}). ` +
-    `Donations are tax-deductible to the extent allowed by law. ` +
-    `No goods or services were provided in exchange for this contribution. ` +
-    `Please keep this receipt for your tax records.`;
+  const { subject, html, text } = renderDonationReceipt({
+    amount: input.amount,
+    designation: input.designation,
+  });
 
   if (!resend) {
     console.warn("[resend] RESEND_API_KEY not set — donation receipt skipped.\n" + text);
@@ -80,7 +105,8 @@ export async function sendDonationReceipt(input: {
   const { error } = await resend.emails.send({
     from: FROM,
     to: input.to,
-    subject: `Your donation to ${org.name}`,
+    subject,
+    html,
     text,
   });
   if (error) {
