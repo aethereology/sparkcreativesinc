@@ -40,3 +40,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Source-image drop folders (local originals). Their optimized copies live in
+# /public/images and /public/docs, which ARE committed and served in production.
+# The 4 program PNGs sit at assets/ root (statically imported) and stay tracked.
+/assets/*/
