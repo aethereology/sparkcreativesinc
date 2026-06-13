@@ -1,12 +1,10 @@
 "use client";
 
-import { useState } from "react";
 import Image from "next/image";
 import { motion, useReducedMotion } from "motion/react";
-import { InstagramLogoIcon, PauseIcon, PlayIcon, UserIcon } from "@phosphor-icons/react";
+import { InstagramLogoIcon, UserIcon } from "@phosphor-icons/react";
 import { A11y, Autoplay, EffectCreative, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import type { Swiper as SwiperClass } from "swiper";
 import "swiper/css";
 import "swiper/css/effect-creative";
 import "swiper/css/pagination";
@@ -48,20 +46,6 @@ export function LeadershipCarousel({
   className?: string;
 }) {
   const reducedMotion = useReducedMotion();
-  const [swiperInstance, setSwiperInstance] = useState<SwiperClass | null>(null);
-  const [isPaused, setIsPaused] = useState(false);
-
-  const toggleAutoplay = () => {
-    if (!swiperInstance) return;
-
-    if (isPaused) {
-      swiperInstance.autoplay.start();
-      setIsPaused(false);
-    } else {
-      swiperInstance.autoplay.stop();
-      setIsPaused(true);
-    }
-  };
 
   return (
     <motion.div
@@ -73,22 +57,6 @@ export function LeadershipCarousel({
     >
       <style>{css}</style>
 
-      {!reducedMotion ? (
-        <div className="absolute bottom-0 left-5 z-10 flex h-14 items-center">
-          <button
-            type="button"
-            onClick={toggleAutoplay}
-            className="flex h-8 w-8 items-center justify-center rounded-full border border-border bg-surface text-ink transition hover:bg-muted focus:outline-none focus:ring-2 focus:ring-primary/50"
-            aria-label={isPaused ? "Resume autoplay" : "Pause autoplay"}
-            aria-pressed={isPaused}
-          >
-            {isPaused
-              ? <PlayIcon className="h-3.5 w-3.5" weight="fill" aria-hidden="true" />
-              : <PauseIcon className="h-3.5 w-3.5" weight="fill" aria-hidden="true" />}
-          </button>
-        </div>
-      ) : null}
-
       <Swiper
         effect="creative"
         grabCursor
@@ -96,7 +64,6 @@ export function LeadershipCarousel({
         centeredSlides
         rewind
         speed={600}
-        onSwiper={setSwiperInstance}
         creativeEffect={{
           limitProgress: 2,
           prev: {
@@ -113,7 +80,7 @@ export function LeadershipCarousel({
           },
         }}
         autoplay={
-          reducedMotion || isPaused
+          reducedMotion
             ? false
             : {
                 delay: 3500,
@@ -214,12 +181,6 @@ export function LeadershipCarousel({
                   aria-hidden="true"
                   className="absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-white/50 to-transparent"
                 />
-
-                <div className="relative flex items-start justify-end p-5">
-                  <span className="font-display text-sm tracking-[0.2em] text-white/70">
-                    {String(i + 1).padStart(2, "0")} / {String(people.length).padStart(2, "0")}
-                  </span>
-                </div>
 
                 <div className="relative mt-auto p-6 text-white">
                   <h3 className="font-display text-2xl font-semibold sm:text-3xl">

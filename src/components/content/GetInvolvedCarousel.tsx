@@ -2,19 +2,15 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
 import {
   BuildingsIcon,
   HandHeartIcon,
   PackageIcon,
-  PauseIcon,
-  PlayIcon,
   UsersIcon,
 } from "@phosphor-icons/react";
 import { A11y, Autoplay, EffectCreative, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import type { Swiper as SwiperClass } from "swiper";
 import "swiper/css";
 import "swiper/css/effect-creative";
 import "swiper/css/pagination";
@@ -94,20 +90,6 @@ const css = `
 
 export function GetInvolvedCarousel({ className }: { className?: string }) {
   const reducedMotion = useReducedMotion();
-  const [swiperInstance, setSwiperInstance] = useState<SwiperClass | null>(null);
-  const [isPaused, setIsPaused] = useState(false);
-
-  const toggleAutoplay = () => {
-    if (!swiperInstance) return;
-
-    if (isPaused) {
-      swiperInstance.autoplay.start();
-      setIsPaused(false);
-    } else {
-      swiperInstance.autoplay.stop();
-      setIsPaused(true);
-    }
-  };
 
   return (
     <motion.div
@@ -119,22 +101,6 @@ export function GetInvolvedCarousel({ className }: { className?: string }) {
     >
       <style>{css}</style>
 
-      {!reducedMotion ? (
-        <div className="absolute bottom-0 left-5 z-10 flex h-14 items-center">
-          <button
-            type="button"
-            onClick={toggleAutoplay}
-            className="flex h-8 w-8 items-center justify-center rounded-full border border-border bg-surface text-ink transition hover:bg-muted focus:outline-none focus:ring-2 focus:ring-primary/50"
-            aria-label={isPaused ? "Resume autoplay" : "Pause autoplay"}
-            aria-pressed={isPaused}
-          >
-            {isPaused
-              ? <PlayIcon className="h-3.5 w-3.5" weight="fill" aria-hidden="true" />
-              : <PauseIcon className="h-3.5 w-3.5" weight="fill" aria-hidden="true" />}
-          </button>
-        </div>
-      ) : null}
-
       <Swiper
         effect="creative"
         grabCursor
@@ -142,7 +108,6 @@ export function GetInvolvedCarousel({ className }: { className?: string }) {
         centeredSlides
         rewind
         speed={600}
-        onSwiper={setSwiperInstance}
         creativeEffect={{
           limitProgress: 2,
           prev: {
@@ -159,7 +124,7 @@ export function GetInvolvedCarousel({ className }: { className?: string }) {
           },
         }}
         autoplay={
-          reducedMotion || isPaused
+          reducedMotion
             ? false
             : {
                 delay: 3000,
@@ -175,7 +140,7 @@ export function GetInvolvedCarousel({ className }: { className?: string }) {
         className="spark-involve-carousel"
         modules={[EffectCreative, Autoplay, Pagination, A11y]}
       >
-        {ROUTES.map((route, i) => {
+        {ROUTES.map((route) => {
           const Icon = route.icon;
           return (
             <SwiperSlide key={route.title}>
@@ -217,9 +182,6 @@ export function GetInvolvedCarousel({ className }: { className?: string }) {
                 <div className="relative flex items-start justify-between p-5">
                   <span className="flex h-11 w-11 items-center justify-center rounded-full border border-white/25 bg-white/10 text-white backdrop-blur-md">
                     <Icon className="h-5 w-5" weight="duotone" aria-hidden="true" />
-                  </span>
-                  <span className="font-display text-sm tracking-[0.2em] text-white/70">
-                    {String(i + 1).padStart(2, "0")} / {String(ROUTES.length).padStart(2, "0")}
                   </span>
                 </div>
 

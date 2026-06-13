@@ -127,9 +127,6 @@ export function ProcessFlow() {
                       </div>
                     )}
                     <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-ink/55 to-transparent" />
-                    <span className="absolute left-4 top-4 flex h-11 w-11 items-center justify-center rounded-full bg-primary font-display text-lg font-semibold text-on-primary shadow-sm">
-                      {i + 1}
-                    </span>
                   </div>
 
                   <div className="flex-1 p-6">
