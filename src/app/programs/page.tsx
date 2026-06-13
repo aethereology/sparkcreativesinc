@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { Section, SectionHeading } from "@/components/layout/SectionWrapper";
-import { EcosystemFlow } from "@/components/content/EcosystemFlow";
-import { ProgramCard } from "@/components/content/ProgramCard";
-import { AudienceRoutes } from "@/components/content/AudienceRoutes";
+import { ProgramOrbit } from "@/components/content/ProgramOrbit";
+import { ProgramHoverExpand } from "@/components/content/ProgramHoverExpand";
+import { GetInvolvedCarousel } from "@/components/content/GetInvolvedCarousel";
 import { CTASection } from "@/components/content/CTASection";
 import { Button } from "@/components/ui/Button";
 import { JsonLd } from "@/components/JsonLd";
@@ -58,16 +58,18 @@ export default function ProgramsPage() {
       <Section tone="paper">
         <SectionHeading align="center" eyebrow="The ecosystem" title="How the programs connect" />
         <div className="mt-10">
-          <EcosystemFlow />
+          <ProgramOrbit />
         </div>
       </Section>
 
       <Section tone="muted">
-        <SectionHeading eyebrow="Four programs" title="Explore each program" />
-        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {programs.map((p) => (
-            <ProgramCard key={p.slug} program={p} />
-          ))}
+        <SectionHeading
+          eyebrow="Four programs"
+          title="Explore each program"
+          lede="Hover or focus a panel to expand it, then select it to see the full program."
+        />
+        <div className="mt-10">
+          <ProgramHoverExpand />
         </div>
       </Section>
 
@@ -105,7 +107,7 @@ export default function ProgramsPage() {
       <Section tone="surface">
         <SectionHeading align="center" eyebrow="Get involved" title="Find your way in" />
         <div className="mt-10">
-          <AudienceRoutes />
+          <GetInvolvedCarousel />
         </div>
       </Section>
 

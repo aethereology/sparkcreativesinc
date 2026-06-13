@@ -13,7 +13,11 @@ export async function POST(request: Request) {
   const stripe = getStripe();
   const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
   if (!stripe || !webhookSecret) {
-    return NextResponse.json({ received: true, configured: false });
+    console.error("[stripe] webhook missing configuration");
+    return NextResponse.json(
+      { error: "Stripe webhook is not configured." },
+      { status: 503 },
+    );
   }
 
   const signature = request.headers.get("stripe-signature");
@@ -30,6 +34,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Invalid signature." }, { status: 400 });
   }
 
+  const eventId = event.id ?? "unknown";
   if (event.type === "checkout.session.completed") {
     const session = event.data.object as Stripe.Checkout.Session;
     const email = session.customer_details?.email ?? session.customer_email;
@@ -40,9 +45,23 @@ export async function POST(request: Request) {
     const designation = designationLabel(session.metadata?.designation ?? "general");
 
     if (email) {
-      await sendDonationReceipt({ to: email, amount, designation });
+      const receiptResult = await sendDonationReceipt({ to: email, amount, designation });
+      if (!receiptResult.ok) {
+        console.error(
+          `[stripe] webhook ${eventId} receipt failed for ${email} | amount=${amount} designation=${designation}`,
+        );
+        return NextResponse.json(
+          { error: "Failed to send donation receipt." },
+          { status: 500 },
+        );
+      }
+      if (receiptResult.skipped) {
+        console.warn(`[stripe] webhook ${eventId} donation receipt skipped because Resend is not configured.`);
+      }
+    } else {
+      console.warn(`[stripe] webhook ${eventId} has no customer email; receipt skipped.`);
     }
   }
 
-  return NextResponse.json({ received: true });
+  return NextResponse.json({ received: true, configured: true });
 }

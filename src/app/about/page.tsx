@@ -1,12 +1,20 @@
 import type { Metadata } from "next";
-import { Building2, HeartHandshake, Compass, FileText, Mail } from "lucide-react";
+import {
+  BuildingsIcon,
+  HandHeartIcon,
+  CompassIcon,
+  FileTextIcon,
+  EnvelopeSimpleIcon,
+} from "@phosphor-icons/react/ssr";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { Section, SectionHeading } from "@/components/layout/SectionWrapper";
 import { CTASection } from "@/components/content/CTASection";
+import { LeadershipCarousel } from "@/components/content/LeadershipCarousel";
 import { Button } from "@/components/ui/Button";
 import { JsonLd } from "@/components/JsonLd";
 import { org } from "@/content/org";
 import { cta } from "@/content/ctas";
+import { leadership } from "@/content/leadership";
 import { pageMetadata } from "@/lib/seo";
 import { webPageSchema, breadcrumbSchema } from "@/lib/schema";
 
@@ -16,13 +24,6 @@ export const metadata: Metadata = pageMetadata({
     "SparkCreatives turns surplus into opportunity — creative empowerment as economic empowerment.",
   path: "/about",
 });
-
-// Leadership is intentionally not invented. Replace with confirmed people.
-const leadership = [
-  { name: "TODO: leadership confirm", role: "Founder & Executive Director" },
-  { name: "TODO: leadership confirm", role: "Programs Lead" },
-  { name: "TODO: leadership confirm", role: "Operations & Impact" },
-];
 
 export default function AboutPage() {
   return (
@@ -59,10 +60,10 @@ export default function AboutPage() {
         </div>
       </PageHeader>
 
-      <Section tone="paper">
+      <Section tone="transparent">
         <div className="grid gap-8 lg:grid-cols-2">
           <div className="rounded-lg border border-border bg-surface p-7">
-            <Compass className="h-7 w-7 text-primary" aria-hidden="true" />
+            <CompassIcon className="h-7 w-7 text-primary" weight="duotone" aria-hidden="true" />
             <h2 className="mt-4 font-display text-2xl font-semibold">Our mission</h2>
             <p className="mt-3 text-ink-soft">
               Turn surplus into opportunity. We transform donated goods and creative
@@ -72,7 +73,7 @@ export default function AboutPage() {
             </p>
           </div>
           <div className="rounded-lg border border-border bg-surface p-7">
-            <HeartHandshake className="h-7 w-7 text-accent" aria-hidden="true" />
+            <HandHeartIcon className="h-7 w-7 text-accent" weight="duotone" aria-hidden="true" />
             <h2 className="mt-4 font-display text-2xl font-semibold">Our vision</h2>
             <p className="mt-3 text-ink-soft">
               Communities where useful resources are never wasted and everyone has access
@@ -83,7 +84,7 @@ export default function AboutPage() {
         </div>
       </Section>
 
-      <Section tone="muted">
+      <Section tone="transparent">
         <SectionHeading
           eyebrow="Our story"
           title="From grassroots support to a program ecosystem"
@@ -102,53 +103,40 @@ export default function AboutPage() {
             hands-on learning in Spark Labs, and open into mentorship and venture pathways
             in Spark Studio.
           </p>
-          <p className="text-base italic text-ink-faint">
-            TODO: leadership confirm founding date, milestones, and story details.
-          </p>
         </div>
       </Section>
 
-      <Section tone="paper">
+      <Section tone="transparent">
         <SectionHeading
           eyebrow="Leadership"
           title="The people behind the work"
           lede="Our team and board guide the programs and stewardship of every gift."
         />
-        <ul className="mt-10 grid gap-5 sm:grid-cols-3">
-          {leadership.map((person, i) => (
-            <li key={i} className="rounded-lg border border-border bg-surface p-6">
-              <div
-                className="flex h-14 w-14 items-center justify-center rounded-full bg-muted font-display text-xl font-semibold text-ink-faint"
-                aria-hidden="true"
-              >
-                ★
-              </div>
-              <p className="mt-4 font-display text-lg font-semibold text-ink">{person.name}</p>
-              <p className="text-sm text-ink-soft">{person.role}</p>
-            </li>
-          ))}
-        </ul>
-        <p className="mt-6 text-sm text-ink-faint italic">
-          TODO: leadership confirm names, titles, bios, and photos before launch.
-        </p>
+        <LeadershipCarousel people={leadership} className="mt-10" />
       </Section>
 
-      <Section tone="muted" id="operations">
+      <Section tone="transparent" id="operations">
         <div className="flex items-start gap-4 scroll-mt-24 rounded-lg border border-border bg-surface p-7">
-          <Building2 className="mt-0.5 h-7 w-7 shrink-0 text-ink-faint" aria-hidden="true" />
+          <BuildingsIcon className="mt-0.5 h-7 w-7 shrink-0 text-ink-faint" weight="duotone" aria-hidden="true" />
           <div>
             <h2 className="font-display text-xl font-semibold">Operations &amp; infrastructure</h2>
             <p className="mt-2 text-ink-soft">
-              Behind the public programs, Aethelo serves as our internal operations and
-              impact infrastructure — the systems that help us track resources, measure
-              outcomes, and run the ecosystem responsibly. It is not a public-facing
-              program.
+              Behind the public programs,{" "}
+              <a
+                href={org.aetheloUrl}
+                className="font-medium text-primary underline-offset-4 hover:underline"
+              >
+                Aethelo
+              </a>{" "}
+              serves as our internal operations and impact infrastructure — the systems
+              that help us track resources, measure outcomes, and run the ecosystem
+              responsibly. It is not a public-facing program.
             </p>
           </div>
         </div>
       </Section>
 
-      <Section tone="paper" id="governance">
+      <Section tone="transparent" id="governance">
         <SectionHeading
           eyebrow="Transparency"
           title="Financials &amp; governance"
@@ -166,23 +154,65 @@ export default function AboutPage() {
                 <dd>{org.ein}</dd>
               </div>
             </dl>
-            <p className="mt-3 text-xs text-ink-faint italic">TODO: leadership confirm.</p>
+            <a
+              href={org.candidProfileUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`${org.name} Candid profile with Platinum Transparency seal`}
+              className="mt-4 inline-block"
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element -- external Candid seal SVG */}
+              <img
+                alt="Candid Platinum Transparency 2026 seal"
+                src="https://widgets.guidestar.org/prod/v1/pdp/transparency-seal/16338045/svg"
+                width={100}
+                height={100}
+                loading="lazy"
+              />
+            </a>
+            <p className="mt-2 text-sm text-ink-soft">
+              We hold a 2026 Platinum Transparency Seal from Candid.{" "}
+              <a
+                href={org.candidProfileUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-medium text-primary underline-offset-4 hover:underline"
+              >
+                View our Candid profile
+              </a>
+              .
+            </p>
           </div>
           <div className="rounded-lg border border-border bg-surface p-6">
-            <FileText className="h-6 w-6 text-accent" aria-hidden="true" />
+            <FileTextIcon className="h-6 w-6 text-accent" weight="duotone" aria-hidden="true" />
             <h3 className="mt-3 font-display text-lg font-semibold">Documents &amp; reporting</h3>
-            <p className="mt-2 text-ink-soft">
-              Annual reports, financial statements, and governance documents will be posted
-              here.
-            </p>
-            <p className="mt-3 text-xs text-ink-faint italic">
-              TODO: leadership add governance documents and links.
+            <ul className="mt-3 space-y-2 text-ink-soft">
+              <li>
+                <a
+                  href="/docs/irs-determination-letter.pdf"
+                  className="font-medium text-primary underline-offset-4 hover:underline"
+                >
+                  IRS 501(c)(3) determination letter (PDF)
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/docs/fdacs-compliance-letter.pdf"
+                  className="font-medium text-primary underline-offset-4 hover:underline"
+                >
+                  FDACS charitable registration compliance letter (PDF)
+                </a>
+              </li>
+            </ul>
+            <p className="mt-3 text-sm text-ink-soft">
+              Annual reports and financial statements will be posted here as they become
+              available.
             </p>
           </div>
         </div>
         <div className="mt-6">
           <Button href={cta.contact.href} variant="outline">
-            <Mail className="h-4 w-4" aria-hidden="true" />
+            <EnvelopeSimpleIcon className="h-4 w-4" weight="bold" aria-hidden="true" />
             Request more information
           </Button>
         </div>

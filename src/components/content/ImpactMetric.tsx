@@ -1,4 +1,4 @@
-import { Info } from "lucide-react";
+import { InfoIcon } from "@phosphor-icons/react/ssr";
 import type { ImpactMetric as Metric } from "@/content/metrics";
 
 export function ImpactMetricCard({ metric }: { metric: Metric }) {
@@ -10,7 +10,7 @@ export function ImpactMetricCard({ metric }: { metric: Metric }) {
       <p className="mt-2 text-sm text-ink-soft">{metric.context}</p>
       {unconfirmed ? (
         <p className="mt-3 inline-flex items-center gap-1.5 text-xs text-ink-faint">
-          <Info className="h-3.5 w-3.5" aria-hidden="true" />
+          <InfoIcon className="h-3.5 w-3.5" weight="bold" aria-hidden="true" />
           {metric.source} · pending confirmation
         </p>
       ) : null}

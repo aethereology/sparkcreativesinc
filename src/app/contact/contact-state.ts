@@ -2,7 +2,7 @@
 export type ContactState = {
   status: "idle" | "success" | "error";
   message: string;
-  errors: Partial<Record<"name" | "email" | "inquiryType" | "message", string>>;
+  errors: Partial<Record<"name" | "email" | "organization" | "inquiryType" | "message", string>>;
 };
 
 export const initialContactState: ContactState = {

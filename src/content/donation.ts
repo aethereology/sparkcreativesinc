@@ -1,8 +1,7 @@
 /**
  * Donation presets and designations.
- * NOTE: amounts are carried from the current live site as SUGGESTED levels and
- * are flagged for confirmation. The UI labels them as suggested, never as fixed
- * prices. TODO: leadership confirm final amounts and what each supports.
+ * Amounts and per-designation defaults confirmed by leadership 2026-06-11.
+ * Levels are suggested, never fixed prices.
  */
 export type Designation = {
   id: string;
@@ -22,11 +21,23 @@ export const designations: Designation[] = [
 export const defaultDesignation = "general";
 
 /** Suggested one-time amounts in whole USD. */
-export const presetAmounts = [50, 100, 150, 300];
+export const presetAmounts = [50, 100, 150, 200, 300, 500];
 
-/** Optional context line per amount (suggested only). TODO: leadership confirm. */
+/** Default amount pre-selected when a designation is chosen. */
+export const designationDefaults: Record<string, number> = {
+  general: 100,
+  "spark-boxes": 150,
+  "spark-labs": 300,
+  "spark-studio": 500,
+  "spark-supply-network": 200,
+};
+
+/** Optional context line per amount (suggested only). */
 export const amountHints: Record<number, string> = {
   150: "Suggested level to sponsor a Spark Box",
+  200: "Suggested level to support the Spark Supply Network",
+  300: "Suggested level to support a Spark Lab",
+  500: "Suggested level to support a Spark Studio pathway",
 };
 
 export const minAmount = 5;

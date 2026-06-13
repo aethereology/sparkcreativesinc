@@ -1,13 +1,17 @@
 import type { ElementType, ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
-type Tone = "paper" | "surface" | "muted" | "ink";
+type Tone = "paper" | "surface" | "muted" | "ink" | "transparent";
 
 const tones: Record<Tone, string> = {
-  paper: "bg-paper text-ink",
-  surface: "bg-surface text-ink",
-  muted: "bg-muted text-ink",
+  // Neutral tones are intentionally background-free so the site-wide FlickeringGrid
+  // backdrop (layout.tsx) shows through consistently on every page. `ink` keeps its
+  // dark fill for deliberate accent bands; `transparent` is an explicit alias.
+  paper: "text-ink",
+  surface: "text-ink",
+  muted: "text-ink",
   ink: "bg-ink text-paper",
+  transparent: "text-ink",
 };
 
 /** Vertical-rhythm section with a centered, max-width container. */

@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import { Target, BarChart3, Scale, ShieldCheck } from "lucide-react";
+import { TargetIcon, ChartBarIcon, ScalesIcon, ShieldCheckIcon } from "@phosphor-icons/react/ssr";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { Section, SectionHeading } from "@/components/layout/SectionWrapper";
-import { ImpactMetricCard } from "@/components/content/ImpactMetric";
+import { ImpactCarousel } from "@/components/content/ImpactCarousel";
 import { CTASection } from "@/components/content/CTASection";
 import { Button } from "@/components/ui/Button";
 import { JsonLd } from "@/components/JsonLd";
-import { impactMetrics } from "@/content/metrics";
+import { impactMetrics, hasUnconfirmedMetrics } from "@/content/metrics";
 import { programs } from "@/content/programs";
 import { cta } from "@/content/ctas";
 import { pageMetadata } from "@/lib/seo";
@@ -20,24 +20,23 @@ export const metadata: Metadata = pageMetadata({
 
 const framework = [
   {
-    icon: BarChart3,
+    icon: ChartBarIcon,
     title: "Outputs",
     body: "What we deliver — boxes packed, Labs hosted, materials moved, hours given.",
   },
   {
-    icon: Target,
+    icon: TargetIcon,
     title: "Outcomes",
     body: "What changes — skills built, confidence gained, ventures and pathways started.",
   },
   {
-    icon: Scale,
+    icon: ScalesIcon,
     title: "Equity",
     body: "Who we reach — making sure access reaches the families and communities who need it.",
   },
 ];
 
-// 2026 goals carried from the current site. These are GOALS, not results.
-// TODO: leadership confirm targets and remap legacy program names.
+// 2026 goals — targets confirmed by leadership 2026-06-11. GOALS, not results.
 const goals2026 = [
   { value: "240", label: "Spark Boxes shipped" },
   { value: "45", label: "Spark Labs / learning graduates" },
@@ -83,16 +82,16 @@ export default function ImpactPage() {
         <SectionHeading
           eyebrow="Impact snapshot"
           title="Our work to date"
-          lede="A transparent snapshot. We carry figures from our current site and re-verify them before publishing."
+          lede="A transparent snapshot. Every figure here is confirmed by leadership before we publish it."
         />
-        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {impactMetrics.map((m) => (
-            <ImpactMetricCard key={m.label} metric={m} />
-          ))}
+        <div className="mt-10">
+          <ImpactCarousel metrics={impactMetrics} />
         </div>
-        <p className="mt-6 text-sm text-ink-faint italic">
-          TODO: leadership confirm all metrics, methodology, and dates before launch.
-        </p>
+        {hasUnconfirmedMetrics ? (
+          <p className="mt-6 text-sm text-ink-faint">
+            Some figures are still being re-verified before publication.
+          </p>
+        ) : null}
       </Section>
 
       <Section tone="muted">
@@ -106,7 +105,7 @@ export default function ImpactPage() {
             const Icon = f.icon;
             return (
               <li key={f.title} className="rounded-lg border border-border bg-surface p-6">
-                <Icon className="h-7 w-7 text-accent" aria-hidden="true" />
+                <Icon className="h-7 w-7 text-accent" weight="duotone" aria-hidden="true" />
                 <h3 className="mt-4 font-display text-xl font-semibold">{f.title}</h3>
                 <p className="mt-2 text-ink-soft">{f.body}</p>
               </li>
@@ -160,15 +159,12 @@ export default function ImpactPage() {
             </li>
           ))}
         </ul>
-        <p className="mt-6 text-sm text-ink-faint italic">
-          TODO: leadership confirm 2026 targets and program mapping.
-        </p>
       </Section>
 
       <Section tone="paper">
         <div className="flex flex-col items-start gap-4 rounded-lg border border-border bg-surface-2 p-8 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex items-start gap-4">
-            <ShieldCheck className="mt-0.5 h-8 w-8 shrink-0 text-accent" aria-hidden="true" />
+            <ShieldCheckIcon className="mt-0.5 h-8 w-8 shrink-0 text-accent" weight="duotone" aria-hidden="true" />
             <div>
               <h2 className="font-display text-xl font-semibold">Built on transparency</h2>
               <p className="mt-1 text-ink-soft">

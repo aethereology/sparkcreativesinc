@@ -62,17 +62,20 @@ export async function sendDonationReceipt(input: {
   to: string;
   amount: string;
   designation: string;
-}): Promise<void> {
+}): Promise<{ ok: boolean; skipped?: boolean }> {
   const resend = getResend();
   const text =
     `Thank you for your gift of ${input.amount} to ${org.name}.\n\n` +
     `Designation: ${input.designation}\n\n` +
-    `Your support helps turn surplus into opportunity.\n` +
-    `TODO: leadership confirm official receipt and tax-acknowledgment language.`;
+    `Your support helps turn surplus into opportunity.\n\n` +
+    `${org.name} is a ${org.legalStatus} (EIN ${org.ein}). ` +
+    `Donations are tax-deductible to the extent allowed by law. ` +
+    `No goods or services were provided in exchange for this contribution. ` +
+    `Please keep this receipt for your tax records.`;
 
   if (!resend) {
     console.warn("[resend] RESEND_API_KEY not set — donation receipt skipped.\n" + text);
-    return;
+    return { ok: true, skipped: true };
   }
   const { error } = await resend.emails.send({
     from: FROM,
@@ -80,5 +83,9 @@ export async function sendDonationReceipt(input: {
     subject: `Your donation to ${org.name}`,
     text,
   });
-  if (error) console.error("[resend] receipt failed:", error);
+  if (error) {
+    console.error("[resend] receipt failed:", error);
+    return { ok: false };
+  }
+  return { ok: true };
 }

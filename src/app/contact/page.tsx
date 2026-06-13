@@ -83,9 +83,6 @@ export default async function ContactPage(props: { searchParams: SearchParams })
                   </span>
                 </li>
               </ul>
-              <p className="mt-3 text-xs text-ink-faint italic">
-                TODO: leadership confirm mailing address.
-              </p>
             </div>
 
             <div className="rounded-lg border border-border bg-surface-2 p-6">
@@ -105,7 +102,11 @@ export default async function ContactPage(props: { searchParams: SearchParams })
             <p className="flex items-start gap-2 text-sm text-ink-faint">
               <LockIcon className="mt-0.5 h-4 w-4 shrink-0" weight="bold" aria-hidden="true" />
               We use your information only to respond to your message. We never sell your
-              data. <span className="italic">TODO: leadership confirm privacy policy.</span>
+              data. Read our{" "}
+              <a className="font-medium text-primary hover:underline" href="/privacy">
+                privacy policy
+              </a>
+              .
             </p>
           </aside>
         </div>

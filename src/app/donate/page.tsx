@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Package, FlaskConical, Sprout, Recycle, ShieldCheck } from "lucide-react";
+import { PackageIcon, FlaskIcon, PlantIcon, RecycleIcon, ShieldCheckIcon } from "@phosphor-icons/react/ssr";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { Section, SectionHeading } from "@/components/layout/SectionWrapper";
 import { DonationForm } from "@/components/forms/DonationForm";
@@ -17,10 +17,10 @@ export const metadata: Metadata = pageMetadata({
 type SearchParams = Promise<{ designation?: string; canceled?: string }>;
 
 const giftUses = [
-  { icon: Package, label: "Pack and deliver Spark Boxes of supplies" },
-  { icon: FlaskConical, label: "Host hands-on Spark Labs" },
-  { icon: Sprout, label: "Support mentorship and creative pathways in Spark Studio" },
-  { icon: Recycle, label: "Keep useful materials moving through the Supply Network" },
+  { icon: PackageIcon, label: "Pack and deliver Spark Boxes of supplies" },
+  { icon: FlaskIcon, label: "Host hands-on Spark Labs" },
+  { icon: PlantIcon, label: "Support mentorship and creative pathways in Spark Studio" },
+  { icon: RecycleIcon, label: "Keep useful materials moving through the Supply Network" },
 ];
 
 export default async function DonatePage(props: { searchParams: SearchParams }) {
@@ -81,7 +81,7 @@ export default async function DonatePage(props: { searchParams: SearchParams }) 
                     key={u.label}
                     className="flex items-start gap-3 rounded-lg border border-border bg-surface p-4"
                   >
-                    <Icon className="mt-0.5 h-5 w-5 shrink-0 text-accent" aria-hidden="true" />
+                    <Icon className="mt-0.5 h-5 w-5 shrink-0 text-accent" weight="duotone" aria-hidden="true" />
                     <span className="text-ink-soft">{u.label}</span>
                   </li>
                 );
@@ -89,13 +89,12 @@ export default async function DonatePage(props: { searchParams: SearchParams }) 
             </ul>
 
             <div className="mt-6 flex items-start gap-3 rounded-lg border border-border bg-surface-2 p-5">
-              <ShieldCheck className="mt-0.5 h-6 w-6 shrink-0 text-accent" aria-hidden="true" />
+              <ShieldCheckIcon className="mt-0.5 h-6 w-6 shrink-0 text-accent" weight="duotone" aria-hidden="true" />
               <div className="text-sm text-ink-soft">
                 <p className="font-semibold text-ink">{org.legalStatus}</p>
                 <p>EIN {org.ein}</p>
                 <p className="mt-2">
-                  Donations are tax-deductible to the extent allowed by law.{" "}
-                  <span className="italic">TODO: leadership confirm tax language.</span>
+                  Donations are tax-deductible to the extent allowed by law.
                 </p>
               </div>
             </div>

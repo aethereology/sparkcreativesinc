@@ -1,4 +1,4 @@
-import { ChevronDown } from "lucide-react";
+import { CaretDownIcon } from "@phosphor-icons/react/ssr";
 
 export type FaqItem = { question: string; answer: string };
 
@@ -10,8 +10,9 @@ export function FAQ({ items }: { items: FaqItem[] }) {
         <details key={item.question} className="group">
           <summary className="flex cursor-pointer items-center justify-between gap-4 px-5 py-4 font-medium text-ink marker:content-none hover:bg-muted">
             <span>{item.question}</span>
-            <ChevronDown
+            <CaretDownIcon
               className="h-5 w-5 shrink-0 text-ink-faint transition-transform group-open:rotate-180"
+              weight="bold"
               aria-hidden="true"
             />
           </summary>

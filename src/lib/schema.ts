@@ -28,7 +28,8 @@ export function organizationSchema() {
       postalCode: org.address.postalCode,
       addressCountry: org.address.country,
     },
-    areaServed: org.locations,
+    areaServed: org.regionsServed,
+    sameAs: org.social.map((s) => s.href),
   };
 }
 
@@ -75,7 +76,7 @@ export function serviceSchema(program: Program) {
     serviceType: program.role,
     description: program.shortDescription,
     provider: { "@id": `${SITE_URL}/#organization` },
-    areaServed: org.locations,
+    areaServed: org.regionsServed,
     url: `${SITE_URL}/programs/${program.slug}`,
   };
 }

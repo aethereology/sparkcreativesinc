@@ -10,6 +10,7 @@
 export type VerificationStatus = "verified" | "unconfirmed";
 
 export type ImpactMetric = {
+  id: string;
   value: string;
   label: string;
   context: string;
@@ -17,45 +18,67 @@ export type ImpactMetric = {
   source: string;
   verificationStatus: VerificationStatus;
   dateUpdated: string;
+  /**
+   * Optional photo. Workflow: drop labeled files in web/assets/impact/,
+   * copy to web/public/images/impact/, set the path here (bump ?v=N on replace).
+   */
+  image?: string;
+  imageAlt?: string;
 };
 
 /** Current impact snapshot (live-site figures pending re-confirmation). */
 export const impactMetrics: ImpactMetric[] = [
   {
-    value: "84+",
+    id: "spark-boxes",
+    value: "84",
     label: "Spark Boxes packed",
     context: "Boxes of supplies and creative tools put into people's hands.",
     metricType: "output",
-    source: "Current live site",
-    verificationStatus: "unconfirmed",
+    source: "Leadership confirmed",
+    verificationStatus: "verified",
     dateUpdated: "2026-06-08",
+    image: "/images/impact/spark-boxes.jpg",
+    imageAlt:
+      "Illustration of children and families opening Spark Boxes filled with art supplies and books at a community event.",
   },
   {
-    value: "17",
+    id: "families",
+    value: "217",
     label: "Families directly supported",
     context: "Families reached through Spark Boxes and related programs.",
     metricType: "reach",
-    source: "Current live site",
-    verificationStatus: "unconfirmed",
-    dateUpdated: "2026-06-08",
+    source: "Leadership confirmed",
+    verificationStatus: "verified",
+    dateUpdated: "2026-06-10",
+    image: "/images/impact/families.jpg",
+    imageAlt:
+      "Illustration of families reading and creating together around open Spark Boxes in a town square.",
   },
   {
-    value: "150+",
-    label: "Youth volunteers",
-    context: "Young people contributing time across sorting, packing, and programs.",
+    id: "volunteers",
+    value: "54",
+    label: "Volunteers",
+    context: "People contributing time across sorting, packing, and programs.",
     metricType: "reach",
-    source: "Current live site",
-    verificationStatus: "unconfirmed",
+    source: "Leadership confirmed",
+    verificationStatus: "verified",
     dateUpdated: "2026-06-08",
+    image: "/images/impact/volunteers.jpg",
+    imageAlt:
+      "Illustration of volunteers sorting and packing donated supplies into boxes in a warehouse.",
   },
   {
-    value: "12,000+",
-    label: "Pounds diverted from landfills",
+    id: "landfill-diverted",
+    value: "5,880 lbs",
+    label: "Diverted from landfills",
     context: "Useful materials redirected into community benefit through the Supply Network.",
     metricType: "outcome",
-    source: "Current live site",
-    verificationStatus: "unconfirmed",
+    source: "Leadership confirmed",
+    verificationStatus: "verified",
     dateUpdated: "2026-06-08",
+    image: "/images/impact/landfill-diverted.jpg",
+    imageAlt:
+      "Illustration of a community repurposing reclaimed materials across workshops, gardens, and homes.",
   },
 ];
 

@@ -1,31 +1,37 @@
 import Link from "next/link";
-import { HeartHandshake, PackageOpen, Users, Building2, ArrowRight } from "lucide-react";
+import {
+  HandHeartIcon,
+  PackageIcon,
+  UsersIcon,
+  BuildingsIcon,
+} from "@phosphor-icons/react/ssr";
+import { AnimatedArrow } from "@/components/ui/animated-arrow";
 import { cta } from "@/content/ctas";
 
 const routes = [
   {
-    icon: HeartHandshake,
+    icon: HandHeartIcon,
     title: "Donate funds",
     body: "Sponsor a Spark Box or give to the program where you're needed most.",
     href: cta.donate.href,
     label: cta.donate.label,
   },
   {
-    icon: PackageOpen,
+    icon: PackageIcon,
     title: "Donate goods",
     body: "Give useful supplies, materials, and creative tools to the Supply Network.",
     href: cta.donateGoods.href,
     label: cta.donateGoods.label,
   },
   {
-    icon: Users,
+    icon: UsersIcon,
     title: "Volunteer",
     body: "Help sort, pack, mentor, and run hands-on Spark Labs.",
     href: cta.volunteer.href,
     label: cta.volunteer.label,
   },
   {
-    icon: Building2,
+    icon: BuildingsIcon,
     title: "Partner",
     body: "Bring your business or organization into the work as a partner.",
     href: cta.partner.href,
@@ -44,12 +50,12 @@ export function AudienceRoutes() {
               href={r.href}
               className="group flex h-full flex-col rounded-lg border border-border bg-surface p-6 transition-shadow hover:shadow-md"
             >
-              <Icon className="h-7 w-7 text-primary" aria-hidden="true" />
+              <Icon className="h-7 w-7 text-primary" weight="duotone" aria-hidden="true" />
               <h3 className="mt-4 font-display text-lg font-semibold text-ink">{r.title}</h3>
               <p className="mt-1.5 flex-1 text-sm text-ink-soft">{r.body}</p>
               <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-primary group-hover:gap-2.5">
                 {r.label}
-                <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                <AnimatedArrow />
               </span>
             </Link>
           </li>

@@ -1,11 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { Loader2, Lock } from "lucide-react";
+import { CircleNotchIcon, LockIcon } from "@phosphor-icons/react/ssr";
 import {
   presetAmounts,
   amountHints,
   designations,
+  designationDefaults,
   minAmount,
   maxAmount,
 } from "@/content/donation";
@@ -18,7 +19,9 @@ export function DonationForm({ initialDesignation }: { initialDesignation?: stri
 
   const [frequency, setFrequency] = useState<"one-time" | "monthly">("one-time");
   const [designation, setDesignation] = useState(validInitial);
-  const [preset, setPreset] = useState<number | null>(150);
+  const [preset, setPreset] = useState<number | null>(
+    designationDefaults[validInitial] ?? 100,
+  );
   const [custom, setCustom] = useState("");
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
@@ -95,7 +98,15 @@ export function DonationForm({ initialDesignation }: { initialDesignation?: stri
           id="designation"
           name="designation"
           value={designation}
-          onChange={(e) => setDesignation(e.target.value)}
+          onChange={(e) => {
+            const next = e.target.value;
+            setDesignation(next);
+            const defaultAmount = designationDefaults[next];
+            if (defaultAmount) {
+              setPreset(defaultAmount);
+              setCustom("");
+            }
+          }}
           className="mt-2 w-full rounded-md border border-border bg-paper px-3 py-2.5 text-ink"
         >
           {designations.map((d) => (
@@ -109,7 +120,7 @@ export function DonationForm({ initialDesignation }: { initialDesignation?: stri
       {/* Amount */}
       <fieldset className="mt-6">
         <legend className="text-sm font-semibold text-ink">Amount (USD)</legend>
-        <div className="mt-2 grid grid-cols-2 gap-2 sm:grid-cols-4">
+        <div className="mt-2 grid grid-cols-2 gap-2 sm:grid-cols-3">
           {presetAmounts.map((a) => (
             <button
               key={a}
@@ -131,10 +142,7 @@ export function DonationForm({ initialDesignation }: { initialDesignation?: stri
           ))}
         </div>
         {preset && amountHints[preset] ? (
-          <p className="mt-2 text-xs text-ink-faint">
-            {amountHints[preset]}{" "}
-            <span className="italic">(suggested — TODO: leadership confirm)</span>
-          </p>
+          <p className="mt-2 text-xs text-ink-faint">{amountHints[preset]}</p>
         ) : null}
 
         <div className="mt-3">
@@ -177,7 +185,7 @@ export function DonationForm({ initialDesignation }: { initialDesignation?: stri
       >
         {loading ? (
           <>
-            <Loader2 className="h-5 w-5 animate-spin" aria-hidden="true" />
+            <CircleNotchIcon className="h-5 w-5 animate-spin" weight="bold" aria-hidden="true" />
             Starting secure checkout…
           </>
         ) : (
@@ -189,7 +197,7 @@ export function DonationForm({ initialDesignation }: { initialDesignation?: stri
       </button>
 
       <p className="mt-3 flex items-center justify-center gap-1.5 text-xs text-ink-faint">
-        <Lock className="h-3.5 w-3.5" aria-hidden="true" />
+        <LockIcon className="h-3.5 w-3.5" weight="bold" aria-hidden="true" />
         Secure checkout powered by Stripe
       </p>
     </form>

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowRight, Check } from "lucide-react";
+import { ArrowRightIcon, CheckIcon } from "@phosphor-icons/react/ssr";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { Section, SectionHeading } from "@/components/layout/SectionWrapper";
 import { ProgramIcon } from "@/components/content/ProgramIcon";
@@ -109,7 +109,7 @@ export default async function ProgramPage(props: { params: Params }) {
             <ul className="mt-4 space-y-2">
               {program.outcomes.map((o) => (
                 <li key={o} className="flex gap-2.5 text-ink-soft">
-                  <Check className="mt-1 h-4 w-4 shrink-0 text-accent" aria-hidden="true" />
+                  <CheckIcon className="mt-1 h-4 w-4 shrink-0 text-accent" weight="bold" aria-hidden="true" />
                   {o}
                 </li>
               ))}
@@ -130,9 +130,6 @@ export default async function ProgramPage(props: { params: Params }) {
                   </li>
                 ))}
               </ul>
-              <p className="mt-3 text-xs text-ink-faint italic">
-                TODO: leadership confirm current figures before launch.
-              </p>
             </div>
 
             <div className="rounded-lg border border-border bg-surface p-6">
@@ -147,13 +144,6 @@ export default async function ProgramPage(props: { params: Params }) {
                   </Button>
                 ))}
               </div>
-            </div>
-
-            <div className="rounded-lg border border-border bg-surface p-6 text-sm text-ink-soft">
-              <h2 className="font-display text-base font-semibold text-ink">
-                How this fits the rebuild
-              </h2>
-              <p className="mt-2">{program.legacyMapping}</p>
             </div>
           </aside>
         </div>
@@ -175,8 +165,9 @@ export default async function ProgramPage(props: { params: Params }) {
                   />
                   <span className="font-medium text-ink">{p.name}</span>
                 </span>
-                <ArrowRight
+                <ArrowRightIcon
                   className="h-4 w-4 text-ink-faint transition-transform group-hover:translate-x-0.5"
+                  weight="bold"
                   aria-hidden="true"
                 />
               </Link>

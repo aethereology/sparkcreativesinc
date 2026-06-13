@@ -13,6 +13,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/get-involved", priority: 0.8 },
     { path: "/donate", priority: 0.9 },
     { path: "/contact", priority: 0.6 },
+    { path: "/privacy", priority: 0.3 },
   ];
 
   const programRoutes = programs.map((p) => ({

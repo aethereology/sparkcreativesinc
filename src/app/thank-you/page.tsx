@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { CheckCircle2 } from "lucide-react";
+import { CheckCircleIcon } from "@phosphor-icons/react/ssr";
 import { Section } from "@/components/layout/SectionWrapper";
 import { Button } from "@/components/ui/Button";
 import { org } from "@/content/org";
@@ -33,12 +33,14 @@ export default async function ThankYouPage(props: { searchParams: SearchParams }
   return (
     <Section tone="paper" className="text-center">
       <div className="mx-auto max-w-xl">
-        <CheckCircle2 className="mx-auto h-14 w-14 text-accent" aria-hidden="true" />
+        <CheckCircleIcon className="mx-auto h-14 w-14 text-accent" weight="duotone" aria-hidden="true" />
         <h1 className="mt-6 font-display text-4xl font-semibold">{heading}</h1>
         <p className="mt-4 text-lg text-ink-soft">{body}</p>
         {isDonation ? (
-          <p className="mt-2 text-sm text-ink-faint italic">
-            TODO: leadership confirm receipt and tax-acknowledgment language.
+          <p className="mt-2 text-sm text-ink-faint">
+            {org.name} is a {org.legalStatus} (EIN {org.ein}). Donations are
+            tax-deductible to the extent allowed by law. No goods or services were
+            provided in exchange for this contribution.
           </p>
         ) : null}
 

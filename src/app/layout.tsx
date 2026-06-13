@@ -3,6 +3,7 @@ import { Fraunces, Hanken_Grotesk } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { FlickeringGrid } from "@/components/ui/flickering-grid";
 import { org } from "@/content/org";
 import { SITE_URL } from "@/lib/utils";
 import { organizationSchema, websiteSchema } from "@/lib/schema";
@@ -47,6 +48,16 @@ export default function RootLayout({
       className={`${fraunces.variable} ${hanken.variable} h-full`}
     >
       <body className="flex min-h-full flex-col">
+        {/* Site-wide backdrop: warm ember flecks, very subtle (consistent on every page). */}
+        <FlickeringGrid
+          className="fixed inset-0 -z-10"
+          color="#ea580c"
+          squareSize={4}
+          gridGap={7}
+          flickerChance={0.18}
+          maxOpacity={0.1}
+        />
+
         {/* Site-wide JSON-LD: Organization + WebSite */}
         <script
           type="application/ld+json"

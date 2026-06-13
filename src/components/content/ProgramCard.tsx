@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRightIcon } from "@phosphor-icons/react/ssr";
 import type { Program } from "@/content/programs";
 import { ProgramIcon } from "@/components/content/ProgramIcon";
 import { cn } from "@/lib/utils";
@@ -30,7 +30,7 @@ export function ProgramCard({ program }: { program: Program }) {
 
       <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-primary transition-transform group-hover:gap-2.5">
         Learn more
-        <ArrowRight className="h-4 w-4" aria-hidden="true" />
+        <ArrowRightIcon className="h-4 w-4" weight="bold" aria-hidden="true" />
       </span>
     </article>
   );

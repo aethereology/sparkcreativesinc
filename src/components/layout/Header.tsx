@@ -3,11 +3,12 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { ChevronDown, Menu, X } from "lucide-react";
+import { CaretDownIcon } from "@phosphor-icons/react/ssr";
 import { mainNav } from "@/content/nav";
 import { cta } from "@/content/ctas";
 import { Logo } from "@/components/brand/Logo";
 import { Button } from "@/components/ui/Button";
+import { AnimatedMenu } from "@/components/ui/animated-icons";
 import { cn } from "@/lib/utils";
 
 function isActive(pathname: string, href: string) {
@@ -76,11 +77,12 @@ export function Header() {
                   )}
                 >
                   {item.label}
-                  <ChevronDown
+                  <CaretDownIcon
                     className={cn(
                       "h-4 w-4 transition-transform",
                       openMenu === item.label && "rotate-180",
                     )}
+                    weight="bold"
                     aria-hidden="true"
                   />
                 </button>
@@ -133,7 +135,7 @@ export function Header() {
           aria-label={mobileOpen ? "Close menu" : "Open menu"}
           onClick={() => setMobileOpen((o) => !o)}
         >
-          {mobileOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          <AnimatedMenu open={mobileOpen} />
         </button>
       </nav>
 

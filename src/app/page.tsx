@@ -1,16 +1,14 @@
 import type { Metadata } from "next";
 import { Hero } from "@/components/content/Hero";
-import { TrustStrip } from "@/components/content/TrustStrip";
 import { ProcessFlow } from "@/components/content/ProcessFlow";
-import { ProgramCard } from "@/components/content/ProgramCard";
-import { EcosystemFlow } from "@/components/content/EcosystemFlow";
-import { ImpactMetricCard } from "@/components/content/ImpactMetric";
-import { AudienceRoutes } from "@/components/content/AudienceRoutes";
+import { ProgramHoverExpand } from "@/components/content/ProgramHoverExpand";
+import { ProgramOrbit } from "@/components/content/ProgramOrbit";
+import { ImpactCarousel } from "@/components/content/ImpactCarousel";
+import { GetInvolvedCarousel } from "@/components/content/GetInvolvedCarousel";
 import { CTASection } from "@/components/content/CTASection";
 import { Section, SectionHeading } from "@/components/layout/SectionWrapper";
 import { Button } from "@/components/ui/Button";
 import { JsonLd } from "@/components/JsonLd";
-import { programs } from "@/content/programs";
 import { impactMetrics, hasUnconfirmedMetrics } from "@/content/metrics";
 import { cta } from "@/content/ctas";
 import { pageMetadata } from "@/lib/seo";
@@ -39,7 +37,6 @@ export default function HomePage() {
       />
 
       <Hero />
-      <TrustStrip />
 
       <Section tone="paper">
         <SectionHeading
@@ -58,10 +55,8 @@ export default function HomePage() {
           title="Four programs, one ecosystem"
           lede="Each program plays a distinct role — and they hand off to one another."
         />
-        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {programs.map((p) => (
-            <ProgramCard key={p.slug} program={p} />
-          ))}
+        <div className="mt-10">
+          <ProgramHoverExpand />
         </div>
         <div className="mt-6">
           <Button href="/programs" variant="ghost">
@@ -75,9 +70,10 @@ export default function HomePage() {
           align="center"
           eyebrow="The ecosystem"
           title="Programs that work together"
+          lede="Spark Supply Network gathers resources, Spark Boxes create access, Spark Labs turn materials into learning, and Spark Studio helps people grow — one circular economy."
         />
-        <div className="mt-10">
-          <EcosystemFlow />
+        <div className="mt-12">
+          <ProgramOrbit />
         </div>
       </Section>
 
@@ -87,15 +83,12 @@ export default function HomePage() {
           title="What we've done so far"
           lede="A snapshot of our work to date. We report honestly and confirm figures before we publish them."
         />
-        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {impactMetrics.map((m) => (
-            <ImpactMetricCard key={m.label} metric={m} />
-          ))}
+        <div className="mt-10">
+          <ImpactCarousel metrics={impactMetrics} />
         </div>
         {hasUnconfirmedMetrics ? (
           <p className="mt-6 text-sm text-ink-faint">
-            Figures reflect our current site and are being re-verified.{" "}
-            <span className="italic">TODO: leadership confirm metrics before launch.</span>
+            Figures reflect our current site and are being re-verified.
           </p>
         ) : null}
         <div className="mt-8">
@@ -113,7 +106,7 @@ export default function HomePage() {
           lede="However you want to help, there's a clear next step."
         />
         <div className="mt-10">
-          <AudienceRoutes />
+          <GetInvolvedCarousel />
         </div>
       </Section>
 

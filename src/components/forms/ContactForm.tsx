@@ -1,7 +1,7 @@
 "use client";
 
 import { useActionState, useEffect, useId, useRef } from "react";
-import { Loader2, CheckCircle2, AlertCircle } from "lucide-react";
+import { CircleNotchIcon, CheckCircleIcon, WarningCircleIcon } from "@phosphor-icons/react/ssr";
 import { submitContact } from "@/app/contact/actions";
 import { initialContactState, type ContactState } from "@/app/contact/contact-state";
 import { useFormStatus } from "react-dom";
@@ -25,7 +25,7 @@ function SubmitButton() {
     >
       {pending ? (
         <>
-          <Loader2 className="h-5 w-5 animate-spin" aria-hidden="true" />
+          <CircleNotchIcon className="h-5 w-5 animate-spin" weight="bold" aria-hidden="true" />
           Sending…
         </>
       ) : (
@@ -74,7 +74,7 @@ function Field({
       <div className="mt-1.5">{children({ id, describedBy })}</div>
       {error ? (
         <p id={errorId} className="mt-1.5 flex items-center gap-1.5 text-sm text-destructive">
-          <AlertCircle className="h-4 w-4 shrink-0" aria-hidden="true" />
+          <WarningCircleIcon className="h-4 w-4 shrink-0" weight="fill" aria-hidden="true" />
           {error}
         </p>
       ) : null}
@@ -91,6 +91,15 @@ export function ContactForm({ defaultInquiry }: { defaultInquiry?: string }) {
     initialContactState,
   );
   const summaryRef = useRef<HTMLDivElement>(null);
+  const renderedAtRef = useRef<HTMLInputElement>(null);
+
+  // Stamp the render time client-side (avoids a hydration mismatch from Date.now()).
+  // Writing the DOM value directly — not setState — keeps this out of React's render cycle.
+  useEffect(() => {
+    if (renderedAtRef.current && !renderedAtRef.current.value) {
+      renderedAtRef.current.value = String(Date.now());
+    }
+  }, []);
 
   // Move focus to the status summary after a submit attempt (success or error).
   useEffect(() => {
@@ -109,7 +118,7 @@ export function ContactForm({ defaultInquiry }: { defaultInquiry?: string }) {
         role="status"
         className="rounded-lg border border-border bg-surface p-8 text-center"
       >
-        <CheckCircle2 className="mx-auto h-12 w-12 text-accent" aria-hidden="true" />
+        <CheckCircleIcon className="mx-auto h-12 w-12 text-accent" weight="duotone" aria-hidden="true" />
         <h3 className="mt-4 font-display text-2xl font-semibold">Message sent</h3>
         <p className="mt-2 text-ink-soft">{state.message}</p>
       </div>
@@ -125,7 +134,7 @@ export function ContactForm({ defaultInquiry }: { defaultInquiry?: string }) {
           role="alert"
           className="mb-6 flex items-start gap-2 rounded-md border border-destructive/30 bg-destructive/5 px-4 py-3 text-sm text-destructive"
         >
-          <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />
+          <WarningCircleIcon className="mt-0.5 h-4 w-4 shrink-0" weight="fill" aria-hidden="true" />
           {state.message}
         </div>
       ) : null}
@@ -222,6 +231,7 @@ export function ContactForm({ defaultInquiry }: { defaultInquiry?: string }) {
         </label>
       </div>
 
+      <input type="hidden" name="formRenderedAt" ref={renderedAtRef} defaultValue="" />
       <div className="mt-6">
         <SubmitButton />
       </div>

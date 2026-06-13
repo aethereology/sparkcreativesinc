@@ -4,6 +4,10 @@
  * Fields follow the content model in 02_information_architecture/04-content-models.md.
  */
 import { cta, type Cta } from "./ctas";
+import sparkBoxesImage from "../../assets/spark-boxes.png";
+import sparkLabsImage from "../../assets/spark-labs.png";
+import sparkStudioImage from "../../assets/spark-studio.png";
+import sparkSupplyNetworkImage from "../../assets/spark-supply-network.png";
 
 export type ProgramRole = "Access" | "Learning" | "Growth" | "Supply";
 
@@ -27,6 +31,8 @@ export type Program = {
   primaryCta: Cta;
   secondaryCtas: Cta[];
   imageAlt: string;
+  /** Optional real photo path. Falls back to a themed placeholder. */
+  image?: string;
 };
 
 const SHARED_HOW_IT_WORKS = [
@@ -67,8 +73,8 @@ export const programs: Program[] = [
     legacyMapping: "Keeps the existing Spark Boxes as the flagship public program.",
     primaryCta: cta.sponsorBox,
     secondaryCtas: [cta.donate, cta.volunteer, cta.partner],
-    imageAlt:
-      "TODO: leadership confirm — photo of a packed Spark Box of school and creative supplies.",
+    image: sparkBoxesImage.src,
+    imageAlt: "A packed Spark Box filled with school supplies and creative tools.",
   },
   {
     name: "Spark Labs",
@@ -100,8 +106,8 @@ export const programs: Program[] = [
       "Absorbs the workshop and training pieces of SparkLearn and the environmental education pieces of SparkYouth.",
     primaryCta: cta.hostLab,
     secondaryCtas: [cta.donate, cta.volunteer, cta.partner],
-    imageAlt:
-      "TODO: leadership confirm — photo of a hands-on Spark Lab workshop in progress.",
+    image: sparkLabsImage.src,
+    imageAlt: "A hands-on Spark Lab workshop in progress with participants and materials.",
   },
   {
     name: "Spark Studio",
@@ -133,8 +139,8 @@ export const programs: Program[] = [
       "Absorbs Spark Ventures, deeper SparkLearn mentorship, and SparkYouth leadership.",
     primaryCta: cta.supportPathway,
     secondaryCtas: [cta.donate, cta.volunteer, cta.partner],
-    imageAlt:
-      "TODO: leadership confirm — photo of a mentor and emerging creative working together in Spark Studio.",
+    image: sparkStudioImage.src,
+    imageAlt: "A mentor and emerging creative working together in Spark Studio.",
   },
   {
     name: "Spark Supply Network",
@@ -166,8 +172,8 @@ export const programs: Program[] = [
       "Absorbs SparkYouth sorting and packing, goods donation, in-kind partnerships, and landfill diversion.",
     primaryCta: cta.donateGoodsOrMaterials,
     secondaryCtas: [cta.donate, cta.volunteer, cta.partner],
-    imageAlt:
-      "TODO: leadership confirm — photo of volunteers sorting donated materials for the Supply Network.",
+    image: sparkSupplyNetworkImage.src,
+    imageAlt: "Volunteers sorting donated materials for the Spark Supply Network.",
   },
 ];
 

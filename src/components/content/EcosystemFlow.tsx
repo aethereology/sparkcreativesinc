@@ -1,4 +1,4 @@
-import { ArrowRight } from "lucide-react";
+import { ArrowRightIcon } from "@phosphor-icons/react/ssr";
 import { ecosystemOrder, getProgram } from "@/content/programs";
 import { ProgramIcon } from "@/components/content/ProgramIcon";
 import { cn } from "@/lib/utils";
@@ -37,8 +37,9 @@ export function EcosystemFlow() {
             </div>
             {/* connector arrow between steps on wide screens */}
             {i < flow.length - 1 ? (
-              <ArrowRight
+              <ArrowRightIcon
                 className="absolute -right-3 top-1/2 hidden h-5 w-5 -translate-y-1/2 text-ink-faint lg:block"
+                weight="bold"
                 aria-hidden="true"
               />
             ) : null}

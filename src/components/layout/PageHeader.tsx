@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ChevronRight } from "lucide-react";
+import { CaretRightIcon } from "@phosphor-icons/react/ssr";
 import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
@@ -21,7 +21,7 @@ export function PageHeader({
   children?: ReactNode;
 }) {
   return (
-    <header className="relative overflow-hidden border-b border-border bg-spark-grain">
+    <header className="relative overflow-hidden border-b border-border">
       <div className="mx-auto max-w-6xl px-5 py-14 sm:px-6 sm:py-20">
         {crumbs && crumbs.length > 0 ? (
           <nav aria-label="Breadcrumb" className="mb-6">
@@ -29,7 +29,7 @@ export function PageHeader({
               {crumbs.map((c, i) => (
                 <li key={c.path} className="flex items-center gap-1">
                   {i > 0 ? (
-                    <ChevronRight className="h-3.5 w-3.5" aria-hidden="true" />
+                    <CaretRightIcon className="h-3.5 w-3.5" weight="bold" aria-hidden="true" />
                   ) : null}
                   {i < crumbs.length - 1 ? (
                     <Link href={c.path} className="hover:text-primary">

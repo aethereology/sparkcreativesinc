@@ -1,31 +1,20 @@
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 
-/** The spark mark: radiating strokes forming a warm spark/asterisk. */
+/** The spark mark: an orbit ring with a small brand-orange spark. */
 export function SparkMark({ className }: { className?: string }) {
   return (
     <svg
-      viewBox="0 0 32 32"
+      viewBox="0 0 20 20"
+      fill="none"
       aria-hidden="true"
       focusable="false"
       className={cn("h-7 w-7", className)}
     >
-      <g
-        stroke="var(--color-ember)"
-        strokeWidth="3.2"
-        strokeLinecap="round"
-        fill="none"
-      >
-        <path d="M16 4.5 L16 12" />
-        <path d="M16 20 L16 27.5" />
-        <path d="M4.5 16 L12 16" />
-        <path d="M20 16 L27.5 16" />
-        <path d="M8 8 L13 13" stroke="var(--color-accent)" />
-        <path d="M19 19 L24 24" stroke="var(--color-accent)" />
-        <path d="M24 8 L19 13" />
-        <path d="M13 19 L8 24" />
-      </g>
-      <circle cx="16" cy="16" r="3" fill="var(--color-primary)" />
+      {/* Ring follows ink: near-black in light mode, near-white in dark. */}
+      <circle cx="10" cy="10" r="6" stroke="var(--color-ink)" strokeWidth="1.5" />
+      {/* The spark — brand green (same teal as the Spark Labs icon). */}
+      <circle cx="16" cy="10" r="2" fill="var(--color-accent)" />
     </svg>
   );
 }

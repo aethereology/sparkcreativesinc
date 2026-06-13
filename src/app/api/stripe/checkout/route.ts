@@ -36,7 +36,11 @@ export async function POST(request: Request) {
     );
   }
 
-  const origin = request.headers.get("origin") ?? SITE_URL;
+  const originHeader = request.headers.get("origin");
+  const origin = originHeader &&
+    (originHeader === SITE_URL || /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/i.test(originHeader))
+    ? originHeader
+    : SITE_URL;
   const label = designationLabel(designation);
   const isMonthly = frequency === "monthly";
 

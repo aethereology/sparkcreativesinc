@@ -1,10 +1,10 @@
-import { ShieldCheck, MapPin, Recycle } from "lucide-react";
+import { ShieldCheckIcon, MapPinIcon, RecycleIcon } from "@phosphor-icons/react/ssr";
 import { org } from "@/content/org";
 
 const items = [
-  { icon: ShieldCheck, label: org.legalStatus, sub: `EIN ${org.ein}` },
-  { icon: MapPin, label: "Jacksonville ↔ Cebu", sub: "Local volunteers, global impact" },
-  { icon: Recycle, label: "Reuse-powered", sub: "Surplus redirected into programs" },
+  { icon: ShieldCheckIcon, label: org.legalStatus, sub: `EIN ${org.ein}` },
+  { icon: MapPinIcon, label: "Jacksonville ↔ Cebu", sub: "Local volunteers, global impact" },
+  { icon: RecycleIcon, label: "Reuse-powered", sub: "Surplus redirected into programs" },
 ];
 
 export function TrustStrip() {
@@ -15,7 +15,7 @@ export function TrustStrip() {
           const Icon = it.icon;
           return (
             <li key={it.label} className="flex items-center gap-3">
-              <Icon className="h-6 w-6 shrink-0 text-accent" aria-hidden="true" />
+              <Icon className="h-6 w-6 shrink-0 text-accent" weight="duotone" aria-hidden="true" />
               <span>
                 <span className="block font-semibold text-ink">{it.label}</span>
                 <span className="block text-sm text-ink-faint">{it.sub}</span>
