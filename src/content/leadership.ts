@@ -32,8 +32,8 @@ export const leadership: LeadershipMember[] = [
   {
     name: "Kyle Lamban",
     role: "Vice President & Chief Operations Officer",
-    instagram: "kyleatsparkcreativesincdotorg",
-    image: "/images/about/kyle-lamban.png?v=3",
+    instagram: "84kylelamban",
+    image: "/images/about/kyle-lamban.png?v=4",
     imageAlt: "Portrait of Kyle Lamban, Vice President and Chief Operations Officer.",
   },
   {
