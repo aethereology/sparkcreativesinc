@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { Section, SectionHeading } from "@/components/layout/SectionWrapper";
-import { ProgramOrbit } from "@/components/content/ProgramOrbit";
+import { ProgramCircuit } from "@/components/content/ProgramCircuit";
 import { ProgramHoverExpand } from "@/components/content/ProgramHoverExpand";
 import { GetInvolvedCarousel } from "@/components/content/GetInvolvedCarousel";
 import { CTASection } from "@/components/content/CTASection";
@@ -58,7 +58,7 @@ export default function ProgramsPage() {
       <Section tone="paper">
         <SectionHeading align="center" eyebrow="The ecosystem" title="How the programs connect" />
         <div className="mt-10">
-          <ProgramOrbit />
+          <ProgramCircuit />
         </div>
       </Section>
 

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Hero } from "@/components/content/Hero";
 import { ProcessFlow } from "@/components/content/ProcessFlow";
 import { ProgramHoverExpand } from "@/components/content/ProgramHoverExpand";
-import { ProgramOrbit } from "@/components/content/ProgramOrbit";
+import { ProgramCircuit } from "@/components/content/ProgramCircuit";
 import { ImpactCarousel } from "@/components/content/ImpactCarousel";
 import { GetInvolvedCarousel } from "@/components/content/GetInvolvedCarousel";
 import { CTASection } from "@/components/content/CTASection";
@@ -73,7 +73,7 @@ export default function HomePage() {
           lede="Spark Supply Network gathers resources, Spark Boxes create access, Spark Labs turn materials into learning, and Spark Studio helps people grow — one circular economy."
         />
         <div className="mt-12">
-          <ProgramOrbit />
+          <ProgramCircuit />
         </div>
       </Section>
 

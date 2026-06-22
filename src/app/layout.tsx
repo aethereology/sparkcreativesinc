@@ -29,6 +29,9 @@ export const metadata: Metadata = {
   },
   description: org.thesis,
   applicationName: org.name,
+  icons: {
+    icon: "/icon.svg",
+  },
   openGraph: {
     type: "website",
     siteName: org.name,

@@ -37,7 +37,7 @@ export const impactMetrics: ImpactMetric[] = [
     source: "Leadership confirmed",
     verificationStatus: "verified",
     dateUpdated: "2026-06-08",
-    image: "/images/impact/spark-boxes.jpg",
+    image: "/images/impact/spark-boxes.png?v=2",
     imageAlt:
       "Illustration of children and families opening Spark Boxes filled with art supplies and books at a community event.",
   },
@@ -50,7 +50,7 @@ export const impactMetrics: ImpactMetric[] = [
     source: "Leadership confirmed",
     verificationStatus: "verified",
     dateUpdated: "2026-06-10",
-    image: "/images/impact/families.jpg",
+    image: "/images/impact/families.png?v=2",
     imageAlt:
       "Illustration of families reading and creating together around open Spark Boxes in a town square.",
   },
@@ -63,7 +63,7 @@ export const impactMetrics: ImpactMetric[] = [
     source: "Leadership confirmed",
     verificationStatus: "verified",
     dateUpdated: "2026-06-08",
-    image: "/images/impact/volunteers.jpg",
+    image: "/images/impact/volunteers.png?v=2",
     imageAlt:
       "Illustration of volunteers sorting and packing donated supplies into boxes in a warehouse.",
   },
@@ -76,7 +76,7 @@ export const impactMetrics: ImpactMetric[] = [
     source: "Leadership confirmed",
     verificationStatus: "verified",
     dateUpdated: "2026-06-08",
-    image: "/images/impact/landfill-diverted.jpg",
+    image: "/images/impact/landfill-diverted.png?v=2",
     imageAlt:
       "Illustration of a community repurposing reclaimed materials across workshops, gardens, and homes.",
   },
